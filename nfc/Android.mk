@@ -22,4 +22,10 @@ LOCAL_SRC_FILES := nfc_hw.c
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_MODULE_TAGS := optional
 
+# Symlink /vendor/firmware/libpn544_fw.so to /vendor/lib/firmware/libpn544_fw.so
+LOCAL_POST_INSTALL_CMD := \
+    $(hide) mkdir -p $(TARGET_OUT_VENDOR)/firmware && \
+    rm -f $(TARGET_OUT_VENDOR)/firmware/libpn544_fw.so && \
+    ln -sf /system/vendor/lib/firmware/libpn544_fw_c3.so $(TARGET_OUT_VENDOR)/firmware/libpn544_fw.so
+
 include $(BUILD_SHARED_LIBRARY)
