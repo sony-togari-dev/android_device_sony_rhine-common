@@ -66,15 +66,28 @@ LOCAL_SRC_FILES := \
 
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/include \
-    system/core/libutils
+    system/core/libutils \
+    system/core/libgrallocusage/include \
+    frameworks/native/libs/vr/libdvr/include
 
 LOCAL_SHARED_LIBRARIES := \
+    android.frameworks.bufferhub@1.0 \
+    android.hardware.graphics.allocator@2.0 \
+    android.hardware.graphics.allocator@3.0 \
+    android.hardware.graphics.common@1.2 \
+    android.hardware.graphics.mapper@2.0 \
+    android.hardware.graphics.mapper@2.1 \
+    android.hardware.graphics.mapper@3.0 \
+    libbase \
     libcutils \
     libhardware \
-    liblog \
-    libui \
+    libhidlbase \
+    libhidltransport \
+    libhwbinder \
     libsync \
-    libutils
+    libui \
+    libutils \
+    liblog
 
 LOCAL_MODULE := libshim_camera
 
