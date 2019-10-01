@@ -82,8 +82,6 @@ LOCAL_SHARED_LIBRARIES := \
     libcutils \
     libhardware \
     libhidlbase \
-    libhidltransport \
-    libhwbinder \
     libsync \
     libui \
     libutils \
