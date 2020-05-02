@@ -1,11 +1,9 @@
 #!/sbin/sh
 
-mkdir -p /lta-label
-mount -o ro /dev/block/platform/msm_sdcc.1/by-name/LTALabel /lta-label
-ls lta-label/*.html | grep -q c6[89]02
+strings /dev/block/bootdevice/by-name/LTALabel | grep -q c6[89]02
 if [ $? -eq 0 ]; then
-	mount /dev/block/platform/msm_sdcc.1/by-name/system /system
-	cp /system/etc/firmware/c6x02/* /system/etc/firmware/
-	umount /system
+    for i in $(ls /mnt/system/system/etc/firmware/c6x02/); do
+        mv /mnt/system/system/etc/firmware/c6x02/$i /mnt/system/system/etc/firmware/
+    done
 fi
-umount /lta-label
+rm -rf /mnt/system/system/etc/firmware/c6x02/
