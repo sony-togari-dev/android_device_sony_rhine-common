@@ -137,3 +137,5 @@ service updatemiscta /system/vendor/bin/updatemiscta
     group system
     oneshot
 
+on property:sys.boot_completed=1
+    restart qcamerasvr
