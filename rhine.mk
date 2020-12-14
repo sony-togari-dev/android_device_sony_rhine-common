@@ -126,6 +126,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/usr/keylayout/mhl-rcp.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/mhl-rcp.kl \
     $(COMMON_PATH)/rootdir/system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl
 
+# Lineage Hardware
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.rhine
+
 # MAC address - BT and Wi-Fi
 PRODUCT_PACKAGES += \
     macaddrsetup
