@@ -366,13 +366,6 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale 2
 
-# Start suntrold
-service suntrold /system/vendor/bin/suntrold
-    user system
-    group system camera
-    oneshot
-    class main
-
 # Thermal Manager service
 service thermanager /system/vendor/bin/thermanager /system/vendor/etc/thermanager.xml
     class main

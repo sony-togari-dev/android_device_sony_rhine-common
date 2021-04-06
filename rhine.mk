@@ -111,6 +111,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/vendor/bin/credmgrfirstboot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/credmgrfirstboot.sh
 
+PRODUCT_PACKAGES += \
+    suntrold.sh
+
 
 # Connectivity
 PRODUCT_PACKAGES += \
