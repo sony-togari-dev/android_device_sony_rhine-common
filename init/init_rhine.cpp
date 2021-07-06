@@ -17,13 +17,49 @@
 
 #include <stdlib.h>
 
+#include <android-base/logging.h>
+
+#include <fcntl.h>
+#include <fstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <unistd.h>
+#include <sys/stat.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <android-base/properties.h>
+#include <sys/_system_properties.h>
+#include <sys/types.h>
+
 #include "vendor_init.h"
 #include "property_service.h"
-#include "log/log.h"
 #include "util.h"
 
-#include <android-base/properties.h>
-#include <sys/system_properties.h>
+constexpr auto LTALABEL_PATH = "/dev/block/platform/msm_sdcc.1/by-name/LTALabel";
+
+void property_override(char const prop[], char const value[], bool add = true)
+{
+    auto pi = (prop_info *) __system_property_find(prop);
+
+    if (pi != nullptr) {
+        __system_property_update(pi, value, strlen(value));
+    } else if (add) {
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+    }
+}
+
+void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
+{
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
+
+void property_override_triple(char const product_prop[], char const system_prop[], char const vendor_prop[], char const value[])
+{
+    property_override(product_prop, value);
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
 
 static void import_kernel_nv(const std::string& key, const std::string& value)
 {
@@ -38,4 +74,16 @@ static void import_kernel_nv(const std::string& key, const std::string& value)
 void vendor_load_properties()
 {
     android::init::ImportKernelCmdline(import_kernel_nv);
+
+    if (std::ifstream file = std::ifstream(LTALABEL_PATH, std::ios::binary)) {
+        std::string str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        size_t offset = str.find("MODEL: ");
+
+        if (offset != std::string::npos) {
+            std::string model = str.substr(offset + strlen("MODEL: "), 5);
+            property_override("ro.semc.product.model", model.c_str());
+            property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", model.c_str());
+            property_override_triple("ro.product.name", "ro.product.system.name", "ro.product.vendor.name", model.c_str());
+        }
+    }
 }
