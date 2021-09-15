@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, vendor/aicp/build/target/product/product_launched_with_j_mr2.mk)
+$(call inherit-product, vendor/lineage/build/target/product/product_launched_with_j_mr2.mk)
 
 # inherit from msm8974-common
 $(call inherit-product, device/sony/msm8974-common/msm8974.mk)
