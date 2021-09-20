@@ -189,10 +189,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(COMMON_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:/system/etc/hostapd/hostapd_default.conf
 
-# Custom wifi service
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/init/android.hardware.wifi@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service.rc
-
 # Media profile
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
