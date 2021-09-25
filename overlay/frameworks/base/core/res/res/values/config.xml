@@ -199,7 +199,7 @@
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
-        <item>31</item>
+        <item>35</item>
         <item>0</item>
         <item>0</item>
     </integer-array>
@@ -207,13 +207,13 @@
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <integer-array name="config_virtualKeyVibePattern">
         <item>0</item>
-        <item>31</item>
+        <item>35</item>
         <item>0</item>
         <item>0</item>
     </integer-array>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
-        <item>31</item>
+        <item>35</item>
     </integer-array>
 </resources>
