@@ -1,2 +1,4 @@
 #============= charger ==============
-allow charger sysfs_leds:file write;
+allow charger proc:file r_file_perms;
+allow charger device:dir r_dir_perms;
+allow charger sysfs:file { rw_file_perms getattr };

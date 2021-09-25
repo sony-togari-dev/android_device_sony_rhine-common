@@ -400,10 +400,12 @@ service adsprpcd /system/vendor/bin/adsprpcd
    user media
    group media
 
-service charger /charger
+service charger /system/bin/charger
     class charger
-    user root
-    group root radio system
+    critical
+    user system
+    group system graphics input
+    capabilities SYS_BOOT
     seclabel u:r:charger:s0
 
 # Redefined Service
