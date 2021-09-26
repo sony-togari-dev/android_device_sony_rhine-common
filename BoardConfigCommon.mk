@@ -79,6 +79,12 @@ TARGET_LD_SHIM_LIBS += \
 	/system/vendor/bin/mm-qcamera-daemon|libandroid.so \
 	/system/vendor/bin/iddd|libboringssl-compat.so \
 
+# Override target
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/vendor/bin/adsprpcd \
+    /system/vendor/bin/mm-qcamera-daemon \
+    /system/vendor/bin/sensors.qcom
+
 # Platform props
 TARGET_SYSTEM_PROP += device/sony/rhine-common/system.prop
 
