@@ -15,6 +15,8 @@
 # inherit from msm8974-common
 include device/sony/msm8974-common/BoardConfigCommon.mk
 
+RHINE_COMMON_PATH := device/sony/rhine-common
+
 TARGET_SPECIFIC_HEADER_PATH += device/sony/rhine-common/include
 
 # Platform
@@ -57,7 +59,8 @@ BOARD_HAVE_QCOM_FM := true
 TARGET_QCOM_NO_FM_FIRMWARE := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := libinit_rhine
+TARGET_INIT_VENDOR_LIB := //$(RHINE_COMMON_PATH):libinit_rhine
+TARGET_RECOVERY_DEVICE_MODULES := //$(RHINE_COMMON_PATH):libinit_rhine
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \

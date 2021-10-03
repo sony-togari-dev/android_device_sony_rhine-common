@@ -16,15 +16,7 @@
 cc_library_static {
     name: "libinit_rhine",
     recovery_available: true,
+    include_dirs: ["system/core/init"],
+    static_libs: ["libbase"],
     srcs: ["init_rhine.cpp"],
-    whole_static_libs: ["libbase", "libselinux"],
-    include_dirs: [
-        "system/core/base/include",
-        "system/core/init"
-    ],
-    cflags: [
-        "-Wall",
-        "-std=gnu++1z",
-    ],
-
 }
