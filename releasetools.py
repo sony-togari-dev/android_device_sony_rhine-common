@@ -19,5 +19,6 @@
 def FullOTA_InstallEnd(info):
   info.script.AppendExtra('mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/mnt/system");');
   info.script.AppendExtra('run_program("/tmp/install/bin/c6x02.sh");')
+  info.script.AppendExtra('run_program("/tmp/install/bin/c6806.sh");')
   info.script.AppendExtra('unmount("/mnt/system");');
   return
