@@ -12,3 +12,5 @@
 
 # WIFI
 /sys/module/wlan/parameters/fwpath                      u:object_r:sysfs_wlan_fwpath:s0
+
+/lta-label                                              u:object_r:rootfs:s0

@@ -37,7 +37,9 @@
 #include "property_service.h"
 #include "util.h"
 
-constexpr auto LTALABEL_PATH = "/dev/block/platform/msm_sdcc.1/by-name/LTALabel";
+#define LTALABEL "/lta-label"
+
+enum { C6802, C6806, C6833, C6843 };
 
 void property_override(char const prop[], char const value[], bool add = true)
 {
@@ -61,6 +63,36 @@ void property_override_triple(char const product_prop[], char const system_prop[
     property_override(product_prop, value);
     property_override(system_prop, value);
     property_override(vendor_prop, value);
+}
+
+static int model_number_from_ltalabel() {
+    DIR* dir;
+    struct dirent* dp;
+    int rc = 0;
+
+    // Open '/lta-label' (like 'cd /lta-label')
+    dir = opendir(LTALABEL);
+    if (dir) {
+        // Show all files inside '/lta-label' (like 'ls')
+        while ((dp = readdir(dir)) != NULL) {
+            // Only show html files (like 'grep html')
+            if (strstr(dp->d_name, ".html")) {
+                // Check one of supported models (like 'grep *model*')
+                if (strstr(dp->d_name, "C6802") || strstr(dp->d_name, "c6802")) {
+                    rc = C6802;
+                } else if (strstr(dp->d_name, "C6806") || strstr(dp->d_name, "c6806")) {
+                    rc = C6806;
+                } else if (strstr(dp->d_name, "C6833") || strstr(dp->d_name, "c6833")) {
+                    rc = C6833;
+                } else if (strstr(dp->d_name, "C6843") || strstr(dp->d_name, "c6843")) {
+                    rc = C6843;
+                };
+            };
+        };
+        // Close '/lta-label' (like 'cd /')
+        closedir(dir);
+    };
+    return rc;
 }
 
 void import_kernel_cmdline(const std::function<void(const std::string&, const std::string&)>& fn) {
@@ -89,15 +121,29 @@ void vendor_load_properties()
 {
     import_kernel_cmdline(import_kernel_nv);
 
-    if (std::ifstream file = std::ifstream(LTALABEL_PATH, std::ios::binary)) {
-        std::string str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-        size_t offset = str.find("MODEL: ");
+    std::string model = "";
 
-        if (offset != std::string::npos) {
-            std::string model = str.substr(offset + strlen("MODEL: "), 5);
-            property_override("ro.semc.product.model", model.c_str());
-            property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", model.c_str());
-            property_override_triple("ro.product.name", "ro.product.system.name", "ro.product.vendor.name", model.c_str());
-        }
+    if (model_number_from_ltalabel() != 0) {
+
+        switch (model_number_from_ltalabel()) {
+            case C6802:
+                model = "C6802";
+                break;
+            case C6806:
+                model = "C6806";
+                break;
+            case C6833:
+                model = "C6833";
+                break;
+            case C6843:
+                model = "C6843";
+                break;
+            default:
+                break;
+       };
+
+        property_override("ro.semc.product.model", model.c_str());
+        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", model.c_str());
+        property_override_triple("ro.product.name", "ro.product.system.name", "ro.product.vendor.name", model.c_str());
     }
 }
