@@ -30,6 +30,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 vmalloc=300M dwc3.maximum_speed=high dwc3_msm.prop_chg_detect=Y
 BOARD_KERNEL_CMDLINE  += androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
+TARGET_KERNEL_CLANG_COMPILE := false
 BOARD_KERNEL_SEPARATED_DT := true
 
 # ANT+
@@ -63,8 +64,10 @@ TARGET_INIT_VENDOR_LIB := //$(RHINE_COMMON_PATH):libinit_rhine
 TARGET_RECOVERY_DEVICE_MODULES := libinit_rhine
 
 # SELinux
+#BOARD_SEPOLICY_DIRS += \
+#    device/sony/rhine-common/sepolicy
 BOARD_SEPOLICY_DIRS += \
-    device/sony/rhine-common/sepolicy
+    device/sony/rhine-common/sepolicy-minimal
 
 # Shims
 TARGET_LD_SHIM_LIBS += \
