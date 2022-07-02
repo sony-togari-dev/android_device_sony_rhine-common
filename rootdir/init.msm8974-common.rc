@@ -409,23 +409,10 @@ service audioserver /system/bin/audioserver
     group audio camera drmrpc inet media mediadrm net_bt bluetooth net_bw_acct diag
     ioprio rt 4
 
-service drm /system/bin/drmserver
-    class main
-    user drm
-    group drm system inet drmrpc readproc
-
-
 service media /system/bin/mediaserver
     class main
     user media
     group audio camera inet net_bt bluetooth net_bw_acct drmrpc mediadrm system
-    ioprio rt 4
-
-
-service mediadrm /system/bin/mediadrmserver
-    class main
-    user media
-    group mediadrm drmrpc
     ioprio rt 4
 
 service mpdecision /system/vendor/bin/mpdecision --avg_comp
