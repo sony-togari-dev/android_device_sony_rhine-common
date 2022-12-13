@@ -71,7 +71,6 @@ LOCAL_C_INCLUDES := \
     frameworks/native/libs/vr/libdvr/include
 
 LOCAL_SHARED_LIBRARIES := \
-    android.frameworks.bufferhub@1.0 \
     android.hardware.graphics.allocator@2.0 \
     android.hardware.graphics.allocator@3.0 \
     android.hardware.graphics.common@1.2 \

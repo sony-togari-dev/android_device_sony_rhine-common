@@ -22,6 +22,7 @@ TARGET_SPECIFIC_HEADER_PATH += device/sony/rhine-common/include
 # Platform
 BOARD_VENDOR_PLATFORM := rhine
 PRODUCT_PLATFORM := rhine
+PRODUCT_PLATFORM_SOD := true
 
 # Kernel information
 BOARD_KERNEL_IMAGE_NAME := zImage

@@ -185,8 +185,6 @@ PRODUCT_COPY_FILES += \
 
 # WiFi
 PRODUCT_PACKAGES += \
-    libQWiFiSoftApCfg \
-    libqsap_sdk \
     wcnss_service
 
 PRODUCT_COPY_FILES += \
