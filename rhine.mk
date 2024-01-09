@@ -81,10 +81,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
    libbt-vendor
 
-# BoringSSL hacks
-PRODUCT_PACKAGES += \
-    libboringssl-compat
-
 # Camera
 PRODUCT_PACKAGES += \
     tad_static \
